@@ -3,7 +3,7 @@
 class Database
 {
     protected $pdo;
-
+    protected $sql;
     /**
      * Database constructor.
      *
@@ -34,7 +34,7 @@ class Database
         foreach ($wheres as $key => $value)
             $whereList[] = $key."=".$value;
 
-        $this->pdo
+        $this->sql = $this->pdo
             ->query("SELECT * FROM ".$table." WHERE ".implode(' AND ', $whereList));
 
           return $this;
@@ -43,12 +43,12 @@ class Database
 
       public function single()
       {
-        return $this->pdo->fetch(PDO::FETCH_OBJ);
+        return $this->sql->fetch(PDO::FETCH_OBJ);
       }
 
       public function all()
       {
-        return $this->pdo->fetchAll(PDO::FETCH_OBJ);
+        return $this->sql->fetchAll(PDO::FETCH_OBJ);
       }
 
     public function __destruct() {
