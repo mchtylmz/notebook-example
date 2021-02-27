@@ -34,7 +34,7 @@ class Database
         foreach ($wheres as $key => $value)
             $whereList[] = $key."=".$value;
 
-        return $this->pdo
+        $this->pdo
             ->query("SELECT * FROM ".$table." WHERE ".implode(' AND ', $whereList));
 
           return $this;
