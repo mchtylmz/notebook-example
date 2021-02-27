@@ -28,6 +28,10 @@ class Auth
     public function check() {
         return isset($_SESSION['user_id']);
     }
+    
+    public function user() {
+        return intval($this->user);
+    }
 
     public function logout() {
         if (!$this->check())
