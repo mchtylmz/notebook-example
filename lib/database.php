@@ -22,7 +22,7 @@ class Database
         }
     }
 
-    public function selectOne($table, $wheres) {
+    public function select($table, $wheres) {
 
         // ['field' => 'value']
         // SELECT * FROM users WHERE field=value
@@ -35,9 +35,21 @@ class Database
             $whereList[] = $key."=".$value;
 
         return $this->pdo
-            ->query("SELECT * FROM ".$table." WHERE ".implode(' AND ', $whereList))
-            ->fetch(PDO::FETCH_OBJ);
-    }
+            ->query("SELECT * FROM ".$table." WHERE ".implode(' AND ', $whereList));
+
+          return $this;
+      }
+
+
+      public function single()
+      {
+        return $this->pdo->fetch(PDO::FETCH_OBJ);
+      }
+
+      public function all()
+      {
+        return $this->pdo->fetchAll(PDO::FETCH_OBJ);
+      }
 
     public function __destruct() {
         $this->pdo = null;
